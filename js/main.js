@@ -6,9 +6,12 @@
    //all of the farm animals will have a name, type, and be able to speak:
 class Animal {
     constructor(name, type, numOfLegs) {
-        this.name = name;
+        this._name = name;
         this.type = type;
         this.numOfLegs = numOfLegs;
+    }
+    get name() {
+        return this._name;
     }
     speak(){
         console.log(`${this.name} makes a sound`)
