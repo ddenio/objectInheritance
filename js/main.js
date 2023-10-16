@@ -7,14 +7,17 @@
 class Animal {
     constructor(name, type, numOfLegs) {
         this._name = name;
-        this.type = type;
+        this._type = type;
         this.numOfLegs = numOfLegs;
     }
     get name() {
         return this._name;
     }
+    get type() {
+        return this._type;
+    }
     speak(){
-        console.log(`${this.name} makes a sound`)
+        console.log(`${this._name} makes a sound`)
     }
 }
 
@@ -24,7 +27,15 @@ class Dog extends Animal{
     constructor(name,type, numOfLegs, breed){
         // 'super' will grab all of the properties from the Animal class; 'inherit' all the properties 
         super(name,type, numOfLegs)
-        this.breed = breed
+        this._breed = breed
+    }
+    get breed() {
+        return this._breed;
+    }
+    speak(){
+        //grabbing the inital speak method from our animal class, then having it to a dog specific speak
+        super.speak();
+        console.log(`${this.name} barks`)
     }
 }
 
@@ -32,10 +43,27 @@ class Dog extends Animal{
 
 let simba = new Dog('Simba', 'dog', 4, 'Sheperd');
 
+class Cat extends Animal {
+    constructor(name, type, numOfLegs) {
+        super(name,type,numOfLegs)
+    }
+    speak(){
+        console.log(`${this.name} MEOWS!`)
+    }
+}
+
+let fozzie = new Cat('Fozzie', 'cat', 4)
+
 class Pig extends Animal {
     constructor(name, type, numOfLegs,color) {
         super (name,type,numOfLegs);
-        this.color = color
+        this._color = color
+    }
+    get color() {
+        return this._color
+    }
+    speak() {
+        console.log(`${this.name} OINKS!`)
     }
 }
 
@@ -46,9 +74,15 @@ class LLama extends Animal {
         super(name,type,numOfLegs);
         
     }
-    spit(){
+    speak(){
         console.log(`${this.name}, the llama spits at owner!`)
     }
 }
 
-let spot = new LLama('Grumpy', 'llama', 4)
+let spot = new LLama('Grumpy', 'llama', 4);
+
+let farm = [simba, fozzie,porky,spot]
+
+for(a of farm ) {
+    a.speak();
+}
